@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class TextCounterMain {
 
-    static void main(String[] args) {
+     static void main(String[] args) {
         TextCounter textCount = new TextCounter("hej");
 
 
