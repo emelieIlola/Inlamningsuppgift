@@ -1,52 +1,89 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TextCounterTest {
-
- /*   @Test
-    void testCountChar(){
+/*
+   @Test
+   void testSetAndGetAlText() {
+       TextCounter textCount = new TextCounter();
+       String[] alText;
+       String text = "Hej, vad heter du? Jag heter Emelie.";
+       textCount.setAlText(text);
+       textCount.getAlText();
+       assertEquals(2, alText.length);
+   }*/
+    @Test
+    void testCountRow() {
         TextCounter textCount = new TextCounter();
-        textCount.countChar("hej! & räksmörgås:-)");
-        assertEquals("20", textCount.countChar("hej! & räksmörgås:-)"));
+        String[] alText = {"=)", "hej på dig", "vad heter du 123?", "räksmörgås!"};
+        assertEquals(4, textCount.countRow(alText));
     }
 
     @Test
-    void testCountCharIfCharZero(){
+    void testCountRowIfCharZero() {
         TextCounter textCount = new TextCounter();
-        textCount.countChar("");
-        assertEquals("Null is not exepted. You must wright something.", textCount.countChar(""));
+        String[] alText = {};
+        assertEquals(0, textCount.countRow(alText));
     }
 
-  */
-    @Test
-    void testCountRow(){
-        TextCounter textCount = new TextCounter();
-        String[] allText = {"=)", "hej på dig", "vad heter du 123?", "räksmörgås!"};
-        assertEquals(4, textCount.countRow(allText));
-    }
-    @Test
-    void testCountRowIfCharZero(){
-        TextCounter textCount = new TextCounter();
-        String[] allText = {};
-        assertEquals(0, textCount.countRow(allText));
-    }
     @Test
     void testCountWord() {
         TextCounter textCount = new TextCounter();
-        String[] allText = {"hej", "APA123", " heter Emelie! "};
-        textCount.countWords(allText);
-        assertEquals(0, textCount.countWords(allText));
+        String[] alText = {"hej", "APA123", "heter Emelie ", "!", "()"};
+        textCount.countWords(alText);
+        assertEquals(6, textCount.countWords(alText));
     }
     @Test
-    void testCountCharInAlText(){
+    void testCountWordIfWordIsOnlyShift() {
         TextCounter textCount = new TextCounter();
-        String[] allText = {"hej", "APA123", "heter Emelie!"};
-        textCount.countChar(allText);
-        assertEquals(23, textCount.countChar(allText));
+        String[] alText = {"  hej", "APA123", "sol  moln  ", "    "};
+        textCount.countWords(alText);
+        assertEquals(4, textCount.countWords(alText));
+    }
+    @Test
+    void testCountCharInAlText() {
+        TextCounter textCount = new TextCounter();
+        String[] alText = {"hej", "APA123", "heter Emelie!"};
+        textCount.countChar(alText);
+        assertEquals(22, textCount.countChar(alText));
+    }
+    @Test
+    void testPrintAlText() {
+        TextCounter textCount = new TextCounter();
+        String[] alText = {"hej, vad heter du?", "Jag heter Emelie.", "solen skiner!"};
+        textCount.printAlText(alText);
+        assertEquals("hej, vad heter du? Jag heter Emelie. solen skiner! ", textCount.printAlText(alText));
+    }
+    @Test
+    void testPrintOnlyTheLongestWordFromAlText() {
+        TextCounter textCount = new TextCounter();
+        String[] alText = {"hej, vad heter du? ", "Jag heter Emelie. ", "solen skiner!"};
+        String[] arrLongestWord = textCount.longestWord(alText);
+
+        assertEquals(2, arrLongestWord.length);
+        assertEquals("Emelie", arrLongestWord[0]);
+        assertEquals("skiner", arrLongestWord[1]);
+    }
+    @Test
+    void testIfLongestWordEndsWithSpecialCharacter() {
+        TextCounter textCount = new TextCounter();
+        String[] alText = {"hej, vad heter du? ", "Jag heter Emelie. ", "solen skiner!"};
+        String[] arrLongestWord = textCount.longestWord(alText);
+        assertEquals(2, arrLongestWord.length);
+        assertEquals("Emelie", arrLongestWord[0]);
+        assertEquals("skiner", arrLongestWord[1]);
     }
 
 
+   /* @Test
+    void testGetUserInput(){
+        TextCounter textCount = new TextCounter();
+        textCount.userInput();
+        String[] alText = new String[0];
+        assertEquals(9, alText.length);
+
+    }
     /*
     @Test
     void testTextCounterSetText(){
