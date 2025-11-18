@@ -6,8 +6,9 @@ public class TextCounterMain {
         TextCounter textCount = new TextCounter();
 
         String[] alText = new String[0];  // startar med en tom array
-        alText = textCount.setAlText();
 
+        textCount.setAlText();
+        alText= textCount.getAlText();
         System.out.println();
         System.out.println("Your text is this: " + textCount.printAlText(alText));
         System.out.println();

@@ -124,7 +124,7 @@ public class TextCounter {
         return arrLongestWord;
     }
 
-    public String[] setAlText() {
+    public void setAlText() {
         Scanner scan = new Scanner(System.in);
 
         //stop måste skrivas på en egen rad utan nån annan text
@@ -165,8 +165,10 @@ public class TextCounter {
                 break;
             }
         }
-        return alText;
-    }
+        //return alText;
+        this.alText = alText;
+
+}
 
 
     public String[] getAlText() {
