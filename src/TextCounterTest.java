@@ -3,16 +3,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TextCounterTest {
-/*
-   @Test
-   void testSetAndGetAlText() {
-       TextCounter textCount = new TextCounter();
-       String[] alText;
-       String text = "Hej, vad heter du? Jag heter Emelie.";
-       textCount.setAlText(text);
-       textCount.getAlText();
-       assertEquals(2, alText.length);
-   }*/
+
     @Test
     void testCountRow() {
         TextCounter textCount = new TextCounter();
@@ -77,12 +68,21 @@ public class TextCounterTest {
 
 
    /* @Test
+    void testSetAndGetAlText() {
+       TextCounter textCount = new TextCounter();
+       String[] alText;
+       String text = "Hej, vad heter du? Jag heter Emelie.";
+       textCount.setAlText(text);
+       textCount.getAlText();
+       System.out.println(alText[0]);
+
+       assertEquals(2, alText[0]);
+   }@Test
     void testGetUserInput(){
         TextCounter textCount = new TextCounter();
         textCount.userInput();
         String[] alText = new String[0];
         assertEquals(9, alText.length);
-
     }
     /*
     @Test
@@ -91,7 +91,6 @@ public class TextCounterTest {
         textCount.setText("hejsan");
         assertEquals("hejsan", textCount.setText("hejsan"));
     }
-
 
     @Test
     void test(){

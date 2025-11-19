@@ -116,14 +116,10 @@ public class TextCounter {
                 }
             }
         }
-       /* for (int i = 0; i < arrLongestWord.length; i++) {
-            String word = arrLongestWord[i];
-            System.out.println(word);
-            longestWord += word;
-        }*/
         return arrLongestWord;
     }
 
+    //alText[]=varje rad sparas på ett index.
     public void setAlText() {
         Scanner scan = new Scanner(System.in);
 
@@ -165,11 +161,8 @@ public class TextCounter {
                 break;
             }
         }
-        //return alText;
         this.alText = alText;
-
-}
-
+    }
 
     public String[] getAlText() {
         return alText;
