@@ -3,19 +3,65 @@ import java.util.Scanner;
 public class TextCounter {
     String[] alText;
 
-
     public TextCounter() {
         this.alText = alText;
+    }
 
+    //alText[]=varje rad sparas på ett index.
+    public void setAlText() {
+        Scanner scan = new Scanner(System.in);
+
+        //stop måste skrivas på en egen rad utan nån annan text
+        System.out.println("Write some text. Use how many rows you like. Write STOP to finish. ");
+        // startar med en tom array
+        String[] alText = new String[0];
+
+        while (true) {
+            String text = scan.nextLine(); //läser in en rad från användaren.
+            boolean findStop = false;   //stannar loopen om vi skrier stop.
+
+            // Delar upp texten i en array av ord
+            String[] word = text.split(" ");
+            String rowToSave = "";      //Raden som ska sparas
+
+            for (int i = 0; i < word.length; i++) {
+                if (word[i].equalsIgnoreCase("STOP")) {
+                    findStop = true;
+                    break;
+                }
+                if (rowToSave.length() > 0) {      //lägger till mellanslag mellan ordet.
+                    rowToSave += " ";
+                }
+                rowToSave += word[i];
+            }
+
+            String[] tempAlText = new String[alText.length + 1];
+
+            if (rowToSave.length() > 0) {
+                for (int i = 0; i < alText.length; i++) {
+                    tempAlText[i] = alText[i];
+                }
+                // lägger till rowToSave på sista platsen i den nya arrayen som skapas med en storlek större i varje loop.
+                tempAlText[tempAlText.length - 1] = rowToSave;
+                //slutgiltiga arrayen, allText, uppdateras med att ha samma värde som tempAlText-arrayen.
+                alText = tempAlText;
+            }
+            if (findStop) {
+                break;
+            }
+        }
+        this.alText = alText;
+    }
+
+    public String[] getAlText() {
+        return alText;
     }
 
     public int countChar(String[] alText) {
         int numberOfChars = 0;
 
-
         if (alText.length == 0) {
-            System.out.println("You didn't write anything.");
-            return -1;
+            return 0;
         }
 
         String allTextInOneString = "";
@@ -32,14 +78,12 @@ public class TextCounter {
     public int countRow(String[] alText) {
         int numberOfRows = 0;
         if (alText.length == 0) {
-            System.out.println("You didn't write anything.");
             return 0;
         }
         for (int i = 0; i < alText.length; i++) {
             numberOfRows++;
         }
         return numberOfRows;
-
     }
 
     public int countWords(String[] allText) {
@@ -47,10 +91,10 @@ public class TextCounter {
 
         for (int i = 0; i < allText.length; i++) {
             String rows = allText[i];
-            // System.out.println("raden är: " + rows);
-            String[] words = rows.split("\\s+");   //filtrerar bort flera mellanslag till ett
+
+            String[] words = rows.split(" ");   //
             for (int j = 0; j < words.length; j++) {
-                //System.out.println("ordet är " + words[j]);
+
                 String word = words[j];
                 if (!word.isEmpty()) {
                     numberOfWords++;
@@ -66,8 +110,11 @@ public class TextCounter {
         for (int i = 0; i < alText.length; i++) {
             String row = alText[i];
             alTextAsOne += row + " ";
-            //System.out.println(alTextAsOne);
         }
+        if (alText.length == 0){
+            alTextAsOne = "You did not write anything.";
+        }
+
         return alTextAsOne;
     }
 
@@ -79,7 +126,7 @@ public class TextCounter {
             String row = alText[i];
 
             // delar upp row i strängar där det finns en eller fler white space (mellanslag, radbyte, tab)
-            String[] words = row.split("\\s+");
+            String[] words = row.split(" ");
 
             //plocka ut varje ord ifrån ord-arrayen
             for (int j = 0; j < words.length; j++) {
@@ -119,54 +166,6 @@ public class TextCounter {
         return arrLongestWord;
     }
 
-    //alText[]=varje rad sparas på ett index.
-    public void setAlText() {
-        Scanner scan = new Scanner(System.in);
-
-        //stop måste skrivas på en egen rad utan nån annan text
-        System.out.println("Write some text. Use how many rows you like. Write STOP to finish. ");
-        // startar med en tom array
-        String[] alText = new String[0];
-
-        while (true) {
-            String text = scan.nextLine(); //läser in en rad från användaren.
-
-            // Delar upp texten i en array av ord
-            String[] word = text.split(" ");
-            String rowToSave = "";      //Raden som ska sparas
-            boolean findStop = false;
-
-            for (int i = 0; i < word.length; i++) {
-                if (word[i].equalsIgnoreCase("STOP")) {
-                    findStop = true;
-                    break;
-                }
-                if (rowToSave.length() > 0) {      //lägger till mellanslag mellan ordet.
-                    rowToSave += " ";
-                }
-                rowToSave += word[i];
-            }
-
-            if (rowToSave.length() > 0) {
-                String[] temp = new String[alText.length + 1];
-                for (int i = 0; i < alText.length; i++) {
-                    temp[i] = alText[i];
-                }
-                // lägger till rowToSave på sista platsen i den nya arrayen som skapas med en storlek större i varje loop.
-                temp[temp.length - 1] = rowToSave;
-                //slutgiltiga arrayen, allText, uppdateras med att ha samma värde som temp-arrayen.
-                alText = temp;
-            }
-            if (findStop) {
-                break;
-            }
-        }
-        this.alText = alText;
-    }
-
-    public String[] getAlText() {
-        return alText;
-    }
 }
 
 

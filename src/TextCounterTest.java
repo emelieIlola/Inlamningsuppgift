@@ -47,9 +47,17 @@ public class TextCounterTest {
         assertEquals("hej, vad heter du? Jag heter Emelie. solen skiner! ", textCount.printAlText(alText));
     }
     @Test
+    void testIfAlTextLengtIs0(){
+        TextCounter textCount = new TextCounter();
+        String[] alText = new String[0];
+        textCount.printAlText(alText);
+        assertEquals("You did not write anything.", textCount.printAlText(alText));
+
+    }
+    @Test
     void testPrintOnlyTheLongestWordFromAlText() {
         TextCounter textCount = new TextCounter();
-        String[] alText = {"hej, vad heter du? ", "Jag heter Emelie. ", "solen skiner!"};
+        String[] alText = {"hej, vad heter du?       ", " Jag heter Emelie. ", " solen skiner!"};
         String[] arrLongestWord = textCount.longestWord(alText);
 
         assertEquals(2, arrLongestWord.length);
